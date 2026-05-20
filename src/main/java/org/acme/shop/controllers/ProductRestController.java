@@ -287,7 +287,7 @@ public class ProductRestController {
                     /**
                      * Delete the product.
                      */
-                    service.deleteProduct(p);
+                    service.deleteProduct(id);
 
                     /**
                      * Returns:

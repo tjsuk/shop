@@ -172,19 +172,10 @@ public class ProductService {
         return productRepository.save(product);
     }
 
-    /**
-     * Deletes a product entity.
-     *
-     * The entire object is supplied rather
-     * than just the ID.
-     */
-    public void deleteProduct(
-            Product product
-    ) {
+    public void deleteProduct(Long id) {
 
-        productRepository.delete(product);
+        productRepository.deleteById(id);
     }
-
     /**
      * Deletes a product using its ID.
      */

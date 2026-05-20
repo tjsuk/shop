@@ -3,51 +3,127 @@
       xmlns:th="http://www.thymeleaf.org">
 
 <head>
+
     <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+
     <title>Products</title>
 
     <link
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
             rel="stylesheet">
+
 </head>
 
 <body class="container mt-4">
 
-<h1 class="mb-4">Products</h1>
+<h1 class="mb-4">
 
-<a href="/web/products/new"
+    Products
+
+</h1>
+
+<a th:href="@{/web/products/new}"
    class="btn btn-primary mb-3">
 
     Add Product
 
 </a>
 
-<table class="table table-striped">
+<table class="table table-striped table-hover">
 
-    <thead>
+    <thead class="table-dark">
+
     <tr>
+
         <th>ID</th>
+
         <th>Name</th>
+
         <th>Price</th>
+
+        <th width="220">
+
+            Actions
+
+        </th>
+
     </tr>
+
     </thead>
 
     <tbody>
 
     <tr th:each="product : ${products}">
 
+        <!-- Product ID -->
+
         <td th:text="${product.id}"></td>
+
+        <!-- Product Name -->
 
         <td>
 
             <a
                     th:href="@{/web/products/{id}(id=${product.id})}"
+
                     th:text="${product.name}">
             </a>
 
         </td>
 
-        <td th:text="${product.price}"></td>
+        <!-- Product Price -->
+
+        <td th:text="${#numbers.formatDecimal(product.price, 1, 2)}"></td>
+
+        <!-- CRUD Actions -->
+
+        <td>
+
+            <!-- View -->
+
+            <a th:href="@{/web/products/{id}(id=${product.id})}"
+
+               class="btn btn-info btn-sm">
+
+                View
+
+            </a>
+
+            <!-- Edit -->
+
+            <a th:href="@{/web/products/{id}/edit(id=${product.id})}"
+
+               class="btn btn-warning btn-sm">
+
+                Edit
+
+            </a>
+
+            <!-- Delete -->
+
+            <form
+                    th:action="@{/web/products/{id}/delete(id=${product.id})}"
+
+                    method="post"
+
+                    style="display:inline;">
+
+                <button type="submit"
+
+                        class="btn btn-danger btn-sm"
+
+                        th:attr="onclick=|return confirm('Delete ${product.name}?')|">
+
+                    Delete
+
+                </button>
+
+            </form>
+
+        </td>
 
     </tr>
 
@@ -56,4 +132,5 @@
 </table>
 
 </body>
+
 </html>
