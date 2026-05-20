@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Products</title>
+
+    <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+            rel="stylesheet">
+</head>
+
+<body class="container mt-4">
+
+<h1 class="mb-4">Products</h1>
+
+<a href="/web/products/new"
+   class="btn btn-primary mb-3">
+
+    Add Product
+
+</a>
+
+<table class="table table-striped">
+
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Price</th>
+    </tr>
+    </thead>
+
+    <tbody>
+
+    <tr th:each="product : ${products}">
+
+        <td th:text="${product.id}"></td>
+
+        <td>
+
+            <a
+                    th:href="@{/web/products/{id}(id=${product.id})}"
+                    th:text="${product.name}">
+            </a>
+
+        </td>
+
+        <td th:text="${product.price}"></td>
+
+    </tr>
+
+    </tbody>
+
+</table>
+
+</body>
+</html>
